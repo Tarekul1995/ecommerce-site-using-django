@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}{% static 'css/detail.css' %}{% endblock %}
+{% block tittle %}Product_Detail{% endblock %}
+{% block content %}
+{% if username == None %}
+{% include "nav.html" %}
+{% else %}
+{% include "nav2.html" %}
+{% endif %}
+<!--<div class="container">
+    <div class="row" style="margin-top: 6%">
+
+      <div class="col-sm-8 blog-main">
+
+        <div class="blog-post">
+            <div class="row">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="col-md-6 text-right">
+                          <img src="{{ product.image.url }}" alt="..." style="height: 370px; width:250px">
+                      </div>
+                      <div class="col-md-6" style="padding-left: 20px">
+                          <h3>{{ product.name }}</h3>
+                          <h6><a href="#">{{ product.category }}</a></h6>
+                          <p class="text-muted">{{ product.price }}</p>
+                          <p>{{ product.detail|safe|linebreaksbr }}</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>-->
+<main class="mt-5 pt-4">
+        <div class="container dark-grey-text mt-5">
+            <div class="row wow fadeIn">
+                    <div class="col-md-6 mb-4">
+                            <img src="{{ product.image.url }}" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                                <div class="p-4">
+                                    <h3 style="color:aqua;">{{ product.name }}</h3>
+                                    <p class="lead">Price : <span>{{ product.price }}</span></p>
+                                    {% if product.is_product_available == True %}
+                                    <p class="lead">Stock : <span>{{ product.store }}</span> is available</p>
+                                    {% else %}
+                                    <p class="lead">Product is Sold</p>
+                                    {% endif %}
+                                    
+                                    <p class="lead font-weight-bold">Description</p>
+                                    <p>{{ product.detail }}</p>
+                                    <form class="d-flex justify-content-left">
+                                                <!-- Default input -->
+                                        <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                                        <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+                                            <i class="fa fa-shopping-cart ml-1"></i>
+                                            </button>
+                                  
+                                    </form>
+                                </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+                
+</main>
+<script type="text/javascript" src="{%  static  'js/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{%  static  'js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{%  static  'js/mdb.min.js' %}"></script>
+<script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+{% endblock %}

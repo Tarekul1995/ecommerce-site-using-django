@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}{% static 'css/Home.css' %}{% endblock %}
+{% block tittle %}Home{% endblock %}
+{% block content %}
+{% if username == None %}
+{% include "nav.html" %}
+{% else %}
+{% include "nav2.html" %}
+{% endif %}
+
+<div id="promo">
+    <div class="jumbotron">
+   <h1 class="display-4">E-commerce Demo</h1>
+   <p class="lead">This is a simple E-commerce Site, It will be use for Data mining. Here we will focus Electronics, Dresses, T-Shirt etc. Hopefully once day this project will be complete. This website have been created base Django with python framework.</p>
+   <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+ </div>
+ </div>
+    <section class="features-icons bg-light text-center">
+       <div class="container">
+          <div class="row">
+         {% for i in range %}
+         <div class="col-lg-4">
+            <div class="card">
+              <i class="fas {% cycle 'fa-tshirt' 'fa-desktop' 'fa-book' %}"></i>
+              <div class="card-body">
+                 <h3>{% cycle 'T-Shirt' 'Electronics' 'Books' %}   </h3>
+                 <p class="lead mb-0">{% cycle 'This t-Shirt is nice, good design, no matter the size!. Hopefully you would visit the site.' 'Here we are collection nice watch, Brand and good quality camera phone for customer. Hopefully you would visit the site.' 'We are also new collection and new comedy book for customer Hopefully you would visit the site.' %}   </p>
+              </div>
+            </div>
+          </div>
+         {% endfor %}
+         </div>
+       </div>
+     </section>
+     <section class="text-center mb-0">
+      <h1 class="display-1 mb-2">Recent Products</h1>
+      <div class="container">
+        <div class="row">
+            
+          {% for product in products %}
+          <div class="col-lg-4">
+           <div class="card mb-3" style="width: 18rem;">
+            <img class="card-img-top" src="{{ product.image.url }}" height="300" width="200" alt="Card image cap">
+            <div class="card-body">
+              <a href="{{ product.get_absolute_url }}"><h5 class="card-title">{{ product.name }}</h5></a>
+              <span style="font-weight: bold;">{{ product.price }}</span>
+            </div>
+            {% if username != None %}
+            <form action="{% url 'cart:add_cart' product.id %}" method="POST">
+              {% csrf_token %}
+            <div class="form-group">
+              {{ form.quantity }}
+            </div>
+            <input type="submit" class="btn btn-primary" value="Add cart">
+          </form>
+          {% endif %}
+          </div>
+         </div>
+         {% endfor %}
+   
+       </div>
+      </div>
+     </section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}{% endblock %}
+{% block tittle %}{{ tittle }}{% endblock %}
+{% block content %}
+<div class="container">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+                {% if tittle == 'SignUp' %}
+                <h4 class="card-title mt-3 text-center">Create Account</h4>
+                <p class="text-center">Get started with your free account</p>
+                {% elif tittle == 'SignIn' %}
+                <h4 class="card-title mt-3 text-center">Login your Account</h4>
+                {% endif %}
+                
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% for c in form %}
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{% if tittle == 'SignUp' %} <i class="fa {% cycle 'fa-user' 'fa-user-tie' 'fa-envelope' 'fa-address-card' 'fa-male' 'fa-phone' 'fa-transgender' 'fa-lock' 'fa-lock' %}"></i>{% elif tittle == 'SignIn' %}
+                                <i class="fa {% cycle 'fa-user-tie' 'fa-lock' %}"></i>{% endif %}</span>
+                         </div>
+                        {{ c }}
+                        <br/>
+                        <span class="text-danger small">{{ c.errors }}</span>
+                    </div>
+                    {% endfor %}
+                    {% if tittle == 'SignUp' %} 
+                    <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+                            <p class="text-center">Have an account? <a href="{% url 'account:sign_in' %}">Log In</a> </p>
+                    </div>
+                    {% elif tittle == 'SignIn' %}
+                    <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </div>
+                    {% endif %}
+                   
+                 </form>
+            </article>
+        </div>
+</div>
+{% endblock %}

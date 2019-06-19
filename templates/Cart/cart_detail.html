@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}{% static 'css/detail.css' %}{% endblock %}
+{% block tittle %}Cart_Detail{% endblock %}
+{% block content %}
+{% if username == None %}
+{% include "nav.html" %}
+{% else %}
+{% include "nav2.html" %}
+{% endif %}
+<div class="container">
+    <div class="row">
+        <form action="" method="POST" class="m-auto">
+            <table class="table table-striped table-hover">
+                    <thead style="background-color: #5AC8FA">
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Available</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Your Quantity</th>
+                            <th>Total Price</th>
+                            <th>REMOVE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for x in context %}
+                        <tr>
+                            <th><img src="{{ x.items.image.url }}" alt="" width="100" height="100"></th>
+                            <th>{{ x.items.name }}</th>
+                            <th>{{ x.items.store }}</th>
+                            <th>
+                                <div class="form-group">
+                                {% csrf_token %}
+                                <input type="number" name="quantity{{ forloop.counter }}"  value="1"class="form-control" required="" id="id_quantity">
+                                </div>
+                                
+                            </th>
+                            <th>{{ x.items.price }}</th>
+                            <th>{{ x.quantity }}</th>
+                            <th>{{ x.total_price }}</th>
+                            <th><a class="btn btn-primary" href="{% url 'cart:cart_remove' x.items.id  forloop.counter %}" role="button">Remove</a></th>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><input class="btn btn-primary" type="submit" value="Update"></th>
+                        <th></th>
+                        <th></th>
+                        <th style="color:red;">={{ total_price }}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+    </div>
+</div>
+
+{% endblock %}

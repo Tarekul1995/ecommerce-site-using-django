@@ -1,0 +1,35 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#promo{
+    text-align: center;
+    padding: 40px;
+    background: url("electronics.jpg");
+    background-size: cover;
+}
+#promo .jumbotron{
+    border-radius: 20px;
+    padding: 40px;
+    background-color: rgba(255,255,255,0.75);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.features-icons {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.card{
+  border:none;
+  background:#f8f9fa;
+}
+.card i{
+ font-size: 100px;
+ 
+}
+.fa-book{
+    color: #05D5F6;
+}
+.fa-tshirt{
+  color: #F45514;
+}
